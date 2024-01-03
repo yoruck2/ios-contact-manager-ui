@@ -5,14 +5,10 @@
 //  Created by dopamint on 1/2/24.
 //
 
-import Foundation
-
-
 struct ContactManager {
     
-    private var contacts = [Contact]()
-    
-    
+    var contacts: [Contact]
+
     mutating func addContact(contact: Contact) {
         contacts.append(contact)
     }
@@ -22,7 +18,7 @@ struct ContactManager {
     }
     
     mutating func editContact(contact: Contact) {
-        contacts.map { $0.id == contact.id }
+        
     }
 }
 
