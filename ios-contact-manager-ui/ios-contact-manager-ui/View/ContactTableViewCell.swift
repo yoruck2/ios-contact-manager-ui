@@ -13,7 +13,7 @@ class ContactTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     
-    func setupCell(contact: Contact) {
+    func setUpCell(contact: Contact) {
         titleLabel.text = contact.nameAndAge
         subtitleLabel.text = contact.phoneNumber
     }
