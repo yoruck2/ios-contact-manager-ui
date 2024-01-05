@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCell" textLabel="7Lt-4n-fJf" detailTextLabel="l55-f1-52V" style="IBUITableViewCellStyleSubtitle" id="exQ-Gs-E91">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCell" textLabel="7Lt-4n-fJf" detailTextLabel="l55-f1-52V" style="IBUITableViewCellStyleSubtitle" id="exQ-Gs-E91" customClass="ContactTableViewCell" customModule="ios_contact_manager_ui" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="exQ-Gs-E91" id="3co-DD-zgj">
@@ -43,6 +43,10 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="subtitleLabel" destination="l55-f1-52V" id="yLn-bq-zhF"/>
+                                            <outlet property="titleLabel" destination="7Lt-4n-fJf" id="Gov-QA-UkW"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -54,9 +58,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DX8-X4-w4o" secondAttribute="bottom" id="Fm1-Al-PBj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DX8-X4-w4o" secondAttribute="trailing" id="Nbt-sd-Oog"/>
                             <constraint firstItem="DX8-X4-w4o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Y9X-JG-lAd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DX8-X4-w4o" secondAttribute="bottom" id="m1i-ez-DJ3"/>
                             <constraint firstItem="DX8-X4-w4o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pYa-lo-Doh"/>
                         </constraints>
                     </view>

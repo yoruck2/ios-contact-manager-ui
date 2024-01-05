@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Contact: Codable {
+struct Contact: Decodable {
     var id = UUID().uuidString
     let name: String
     let phoneNumber: String
