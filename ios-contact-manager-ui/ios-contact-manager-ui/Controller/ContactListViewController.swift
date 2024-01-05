@@ -19,39 +19,42 @@ final class ContactListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.contactTableView.dataSource = self
-        self.contactTableView.delegate = self
-        loadData()
+        setupTableView()
+        contactManager.loadData()
     }
     
-    private func loadData() {
-        let jsonDecoder: JSONDecoder = JSONDecoder()
-        guard
-            let dataAsset: NSDataAsset = NSDataAsset(name: "contacts")
-        else {
-            return
-        }
-        
-        do {
-            self.contactManager.contacts = try jsonDecoder.decode([Contact].self, from: dataAsset.data)
-        } catch {
-            print(error.localizedDescription)
-        }
+    private func setupTableView() {
+        contactTableView.dataSource = self
+        contactTableView.delegate = self
     }
 }
 
 extension ContactListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactManager.contacts.count
+        return contactManager.contactsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier: String = "contactCell"
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        let contact: Contact = contactManager.contacts[indexPath.row]
-        cell.textLabel?.text = contact.nameAndAge
-        cell.detailTextLabel?.text = contact.phoneNumber
-        
+        guard
+            let cell: ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier, for: indexPath) as? ContactTableViewCell
+        else {
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier, for: indexPath)
+            cell.textLabel?.text = "내용을 불러오는데 실패했습니다."
+            return cell
+        }
+        let contact = contactManager.contacts[indexPath.row]
+        cell.setupCell(contact: contact)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _ , _, success in
+            guard let self else { return }
+            contactManager.deleteContact(index: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            success(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
 }
