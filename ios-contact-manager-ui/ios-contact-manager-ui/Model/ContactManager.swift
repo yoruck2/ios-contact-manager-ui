@@ -46,4 +46,3 @@ final class ContactManager {
         willEditContactID.forEach { contacts[$0] = contact }
     }
 }
-

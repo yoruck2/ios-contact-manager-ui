@@ -43,7 +43,7 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         }
         let contact = contactManager.contacts[indexPath.row]
-        cell.setupCell(contact: contact)
+        cell.setUpCell(contact: contact)
         return cell
     }
     
