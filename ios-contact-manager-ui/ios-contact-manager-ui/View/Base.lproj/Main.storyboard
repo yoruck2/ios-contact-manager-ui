@@ -59,7 +59,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="연락처" id="ZDZ-8b-v9b">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jEW-7a-Lr5"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jEW-7a-Lr5">
+                                            <connections>
+                                                <action selector="tappedAddContatctButton:" destination="BYZ-38-t0r" id="NxV-gA-ONh"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -84,7 +88,7 @@
         <!--Add Contatct View Controller-->
         <scene sceneID="vtk-Ya-Bv1">
             <objects>
-                <viewController id="iit-K1-e5v" customClass="AddContatctViewController" customModule="ios_contact_manager_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddContactViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iit-K1-e5v" customClass="AddContatctViewController" customModule="ios_contact_manager_ui" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W9L-Rw-aw3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
