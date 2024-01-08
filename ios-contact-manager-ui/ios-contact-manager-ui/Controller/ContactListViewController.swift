@@ -56,5 +56,4 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-    
 }
