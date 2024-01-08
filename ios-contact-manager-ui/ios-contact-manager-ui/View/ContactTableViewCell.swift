@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ContactTableViewCell: UITableViewCell {
+final class ContactTableViewCell: UITableViewCell {
     
     static let identifier: String = "contactCell"
     @IBOutlet weak var titleLabel: UILabel!
