@@ -21,6 +21,7 @@ final class ContactListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         contactManager.loadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name("updateUI"), object: nil)
     }
     
     private func setupTableView() {
@@ -28,9 +29,16 @@ final class ContactListViewController: UIViewController {
         contactTableView.delegate = self
     }
     
+    @objc
+    private func updateUI() {
+        contactTableView.reloadData()
+    }
+    
     @IBAction private func tappedAddContatctButton(_ sender: UIBarButtonItem) {
         guard
-            let addContactViewController = storyboard?.instantiateViewController(withIdentifier: "AddContactViewController")
+            let addContactViewController = storyboard?.instantiateViewController(identifier: "AddContactViewController", creator: { coder in
+                return AddContactViewController(contactManager: self.contactManager, coder: coder)
+            })
         else {
             return
         }
