@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DX8-X4-w4o">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="contactCell" textLabel="7Lt-4n-fJf" detailTextLabel="l55-f1-52V" style="IBUITableViewCellStyleSubtitle" id="exQ-Gs-E91" customClass="ContactTableViewCell" customModule="ios_contact_manager_ui" customModuleProvider="target">
@@ -54,14 +54,23 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="5Z5-Um-jiG"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" id="gZi-XV-3Z8">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="연락처" id="ZDZ-8b-v9b">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jEW-7a-Lr5"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DX8-X4-w4o" secondAttribute="trailing" id="Nbt-sd-Oog"/>
-                            <constraint firstItem="DX8-X4-w4o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Y9X-JG-lAd"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DX8-X4-w4o" secondAttribute="bottom" id="m1i-ez-DJ3"/>
-                            <constraint firstItem="DX8-X4-w4o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pYa-lo-Doh"/>
+                            <constraint firstItem="DX8-X4-w4o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9y9-f9-QL2"/>
+                            <constraint firstItem="DX8-X4-w4o" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="D5H-TV-wfn"/>
+                            <constraint firstItem="DX8-X4-w4o" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bJd-Zq-nkk"/>
+                            <constraint firstItem="DX8-X4-w4o" firstAttribute="top" secondItem="gZi-XV-3Z8" secondAttribute="bottom" id="j59-eE-7Dj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -70,7 +79,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="-34"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+        </scene>
+        <!--Add Contatct View Controller-->
+        <scene sceneID="vtk-Ya-Bv1">
+            <objects>
+                <viewController id="iit-K1-e5v" customClass="AddContatctViewController" customModule="ios_contact_manager_ui" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W9L-Rw-aw3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="u6e-MS-K1v"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rht-je-1mS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1022" y="-35"/>
         </scene>
     </scenes>
     <resources>
