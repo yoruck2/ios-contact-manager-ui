@@ -51,20 +51,25 @@ final class AddContactViewController: UIViewController {
     }
     
     @IBAction private func tappedSaveButton(_ sender: UIBarButtonItem) {
-        guard
-            let name = nameTextField.text,
-            let phoneNumber = phoneNumberTextField.text,
-            let age = ageTextField.text
-        else {
-            return
+        let inputValidator = InputValidator()
+        let validation = inputValidator.validateInput(nameTextField: nameTextField,
+                                                      ageTextField: ageTextField,
+                                                      phoneNumberTextField: phoneNumberTextField)
+        switch validation {
+        case .success(let contact):
+            contactManager.addContact(contact: contact)
+            dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name("updateUI"), object: nil)
+        case .failure(let error):
+            makeAlert(message: error.localizedDescription,
+                      actions: [UIAlertAction(title: "확인",
+                                              style: .default)])
         }
-        guard
-            let convertAgeToInt = Int(age)
-        else {
-            return
-        }
-        contactManager.addContact(contact: Contact(name: name, phoneNumber: phoneNumber, age: convertAgeToInt))
-        dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name("updateUI"), object: nil)
+    }
+}
+
+extension AddContactViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
     }
 }
