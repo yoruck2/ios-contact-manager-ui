@@ -8,7 +8,7 @@
 import UIKit
 
 final class ContactManager {
-    var contacts: [Contact]
+    private var contacts: [Contact]
     
     var contactsCount: Int {
         return contacts.count
@@ -16,6 +16,10 @@ final class ContactManager {
     
     init(contacts: [Contact]) {
         self.contacts = contacts
+    }
+    
+    func contact(row: Int) -> Contact {
+        return contacts[row]
     }
     
     func loadData() {

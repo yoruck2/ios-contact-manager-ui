@@ -38,24 +38,38 @@ final class AddContactViewController: UIViewController {
     }
     
     @IBAction private func tappedCancelButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        makeAlert(message: "정말로 취소하시겠습니까?",
+                  actions: [
+                    UIAlertAction(title: "아니오",
+                                  style: .cancel),
+                    UIAlertAction(title: "예",
+                                  style: .destructive,
+                                  handler: { [weak self] _ in
+                                      guard let self else { return }
+                                      dismiss(animated: true)})
+                  ])
     }
     
     @IBAction private func tappedSaveButton(_ sender: UIBarButtonItem) {
-        guard
-            let name = nameTextField.text,
-            let phoneNumber = phoneNumberTextField.text,
-            let age = ageTextField.text
-        else {
-            return
+        let inputValidator = InputValidator()
+        let validation = inputValidator.validateInput(nameTextField: nameTextField,
+                                                      ageTextField: ageTextField,
+                                                      phoneNumberTextField: phoneNumberTextField)
+        switch validation {
+        case .success(let contact):
+            contactManager.addContact(contact: contact)
+            dismiss(animated: true)
+            NotificationCenter.default.post(name: NSNotification.Name("updateUI"), object: nil)
+        case .failure(let error):
+            makeAlert(message: error.localizedDescription,
+                      actions: [UIAlertAction(title: "확인",
+                                              style: .default)])
         }
-        guard
-            let convertAgeToInt = Int(age)
-        else {
-            return
-        }
-        contactManager.addContact(contact: Contact(name: name, phoneNumber: phoneNumber, age: convertAgeToInt))
-        dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name("updateUI"), object: nil)
+    }
+}
+
+extension AddContactViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
     }
 }

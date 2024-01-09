@@ -59,7 +59,7 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
             cell.textLabel?.text = "내용을 불러오는데 실패했습니다."
             return cell
         }
-        let contact = contactManager.contacts[indexPath.row]
+        let contact = contactManager.contact(row: indexPath.row)
         cell.setUpCell(with: contact)
         return cell
     }
