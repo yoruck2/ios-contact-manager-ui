@@ -38,7 +38,16 @@ final class AddContactViewController: UIViewController {
     }
     
     @IBAction private func tappedCancelButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        makeAlert(message: "정말로 취소하시겠습니까?",
+                  actions: [
+                    UIAlertAction(title: "아니오",
+                                  style: .cancel),
+                    UIAlertAction(title: "예",
+                                  style: .destructive,
+                                  handler: { [weak self] _ in
+                                      guard let self else { return }
+                                      dismiss(animated: true)})
+                  ])
     }
     
     @IBAction private func tappedSaveButton(_ sender: UIBarButtonItem) {
