@@ -9,7 +9,7 @@ import UIKit
 
 final class ContactListViewController: UIViewController {
     
-    @IBOutlet weak var contactTableView: UITableView!
+    @IBOutlet weak private var contactTableView: UITableView!
     private var contactManager: ContactManager
     
     required init?(coder: NSCoder) {
@@ -21,11 +21,28 @@ final class ContactListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         contactManager.loadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name("updateUI"), object: nil)
     }
     
     private func setupTableView() {
         contactTableView.dataSource = self
         contactTableView.delegate = self
+    }
+    
+    @objc
+    private func updateUI() {
+        contactTableView.reloadData()
+    }
+    
+    @IBAction private func tappedAddContatctButton(_ sender: UIBarButtonItem) {
+        guard
+            let addContactViewController = storyboard?.instantiateViewController(identifier: AddContactViewController.identifier, creator: { coder in
+                return AddContactViewController(contactManager: self.contactManager, coder: coder)
+            })
+        else {
+            return
+        }
+        present(addContactViewController, animated: true)
     }
 }
 
@@ -36,14 +53,14 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell: ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier, for: indexPath) as? ContactTableViewCell
+            let cell: ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier) as? ContactTableViewCell
         else {
             let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier, for: indexPath)
             cell.textLabel?.text = "내용을 불러오는데 실패했습니다."
             return cell
         }
         let contact = contactManager.contacts[indexPath.row]
-        cell.setUpCell(contact: contact)
+        cell.setUpCell(with: contact)
         return cell
     }
     

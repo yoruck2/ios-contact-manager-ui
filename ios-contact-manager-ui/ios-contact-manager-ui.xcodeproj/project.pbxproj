@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		277DCD0A2B4B8DA90076784E /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DCD092B4B8DA90076784E /* AddContactViewController.swift */; };
 		846A09D02B43AB0000236358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09CF2B43AB0000236358 /* AppDelegate.swift */; };
 		846A09D22B43AB0000236358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09D12B43AB0000236358 /* SceneDelegate.swift */; };
 		846A09D42B43AB0000236358 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09D32B43AB0000236358 /* ContactListViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		277DCD092B4B8DA90076784E /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		846A09CC2B43AB0000236358 /* ios-contact-manager-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-contact-manager-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		846A09CF2B43AB0000236358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846A09D12B43AB0000236358 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				846A09D32B43AB0000236358 /* ContactListViewController.swift */,
+				277DCD092B4B8DA90076784E /* AddContactViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				846F3E592B47B9D300FE38D1 /* ContactTableViewCell.swift in Sources */,
+				277DCD0A2B4B8DA90076784E /* AddContactViewController.swift in Sources */,
 				846A09E62B43F89D00236358 /* ContactManager.swift in Sources */,
 				846A09E42B43F71800236358 /* Contact.swift in Sources */,
 				846A09D42B43AB0000236358 /* ContactListViewController.swift in Sources */,
