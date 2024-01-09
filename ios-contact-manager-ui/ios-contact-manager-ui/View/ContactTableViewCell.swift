@@ -9,12 +9,14 @@ import UIKit
 
 final class ContactTableViewCell: UITableViewCell {
     
-    static let identifier: String = "contactCell"
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    static var identifier: String {
+        return String(describing: self)
+    }
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var subtitleLabel: UILabel!
     
-    func setUpCell(contact: Contact) {
-        titleLabel.text = contact.nameAndAge
-        subtitleLabel.text = contact.phoneNumber
+    func setUpCell(with: Contact) {
+        titleLabel.text = with.nameAndAge
+        subtitleLabel.text = with.phoneNumber
     }
 }

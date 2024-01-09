@@ -8,12 +8,14 @@
 import UIKit
 
 final class AddContactViewController: UIViewController {
-
+    static var identifier: String {
+        return String(describing: self)
+    }
     private let contactManager: ContactManager
     
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var ageTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak private var nameTextField: UITextField!
+    @IBOutlet weak private var ageTextField: UITextField!
+    @IBOutlet weak private var phoneNumberTextField: UITextField!
     
     init?(contactManager: ContactManager, coder: NSCoder) {
         self.contactManager = contactManager
