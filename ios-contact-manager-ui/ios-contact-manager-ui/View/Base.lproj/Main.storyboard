@@ -48,6 +48,14 @@
                                             <outlet property="titleLabel" destination="7Lt-4n-fJf" id="Gov-QA-UkW"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableViewErrorCell" id="eGc-OZ-BII" customClass="ContactTableViewErrorCell" customModule="ios_contact_manager_ui" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="93.666667938232422" width="393" height="44.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eGc-OZ-BII" id="S74-Z2-1JA">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="H0Q-b3-94v"/>
