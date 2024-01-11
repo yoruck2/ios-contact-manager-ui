@@ -9,13 +9,19 @@ import UIKit
 
 final class ContactListViewController: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak private var contactTableView: UITableView!
     private var contactManager: ContactManager
+    
+    // MARK: - Init
     
     required init?(coder: NSCoder) {
         contactManager = ContactManager(contacts: [])
         super.init(coder: coder)
     }
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +29,8 @@ final class ContactListViewController: UIViewController {
         contactManager.loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name("updateUI"), object: nil)
     }
+    
+    // MARK: - Helper
     
     private func setupTableView() {
         contactTableView.dataSource = self
@@ -35,18 +43,13 @@ final class ContactListViewController: UIViewController {
     }
     
     @IBAction private func tappedAddContatctButton(_ sender: UIBarButtonItem) {
-        guard
-            let addContactViewController = storyboard?.instantiateViewController(identifier: AddContactViewController.identifier, creator: { coder in
-                return AddContactViewController(contactManager: self.contactManager, coder: coder)
-            })
-        else {
-            return
-        }
-        present(addContactViewController, animated: true)
+        
     }
 }
 
-extension ContactListViewController: UITableViewDataSource, UITableViewDelegate {
+// MARK: - UITableViewDataSource
+
+extension ContactListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contactManager.contactsCount
     }
@@ -55,7 +58,7 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         guard
             let cell: ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier) as? ContactTableViewCell
         else {
-            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier, for: indexPath)
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewErrorCell.identifier, for: indexPath)
             cell.textLabel?.text = "내용을 불러오는데 실패했습니다."
             return cell
         }
@@ -63,7 +66,11 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         cell.setUpCell(with: contact)
         return cell
     }
-    
+}
+
+// MARK: - UITableViewDelegate
+
+extension ContactListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _ , _, success in
             guard let self else { return }
