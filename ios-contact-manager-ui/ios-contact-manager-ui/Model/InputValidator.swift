@@ -9,6 +9,7 @@ import UIKit
 
 struct InputValidator {
     
+    // MARK: - Helper
     func validateInput(nameTextField: UITextField,
                        ageTextField: UITextField,
                        phoneNumberTextField: UITextField) -> Result<Contact, Error> {

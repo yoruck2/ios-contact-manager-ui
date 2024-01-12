@@ -8,16 +8,20 @@
 import UIKit
 
 final class ContactManager {
+    
+    // MARK: - Properties
     private var contacts: [Contact]
     
     var contactsCount: Int {
         return contacts.count
     }
     
+    // MARK: - Init
     init(contacts: [Contact]) {
         self.contacts = contacts
     }
     
+    // MARK: - Helper
     func contact(row: Int) -> Contact {
         return contacts[row]
     }

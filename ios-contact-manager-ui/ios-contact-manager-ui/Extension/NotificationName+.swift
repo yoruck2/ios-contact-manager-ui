@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum NotificationName {
+extension Notification.Name {
     static let updateContactUI = Notification.Name("updateContactUI")
 }

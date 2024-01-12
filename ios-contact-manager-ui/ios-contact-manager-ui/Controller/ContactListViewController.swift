@@ -9,24 +9,28 @@ import UIKit
 
 final class ContactListViewController: UIViewController {
     
+    // MARK: - Properties
     @IBOutlet weak private var contactTableView: UITableView!
     private var contactManager: ContactManager
     
+    // MARK: - Init
     required init?(coder: NSCoder) {
         contactManager = ContactManager(contacts: [])
         super.init(coder: coder)
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         contactManager.loadData()
         NotificationCenter.default.addObserver(self, 
                                                selector: #selector(updateUI),
-                                               name: NotificationName.updateContactUI,
+                                               name: .updateContactUI,
                                                object: nil)
     }
     
+    // MARK: - Helper
     private func setupTableView() {
         contactTableView.dataSource = self
         contactTableView.delegate = self
@@ -37,7 +41,7 @@ final class ContactListViewController: UIViewController {
         contactTableView.reloadData()
     }
     
-    @IBAction private func tappedAddContatctButton(_ sender: UIBarButtonItem) {
+    @IBAction private func tappedAddContactButton(_ sender: UIBarButtonItem) {
         guard
             let addContactViewController = storyboard?.instantiateViewController(identifier: AddContactViewController.identifier, creator: { coder in
                 return AddContactViewController(contactManager: self.contactManager, coder: coder)
@@ -49,7 +53,8 @@ final class ContactListViewController: UIViewController {
     }
 }
 
-extension ContactListViewController: UITableViewDataSource, UITableViewDelegate {
+// MARK: - UITableViewDelegate
+extension ContactListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contactManager.contactsCount
     }
@@ -67,7 +72,10 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         cell.setUpCell(with: contact)
         return cell
     }
-    
+}
+
+// MARK: - UITableViewDelegate
+extension ContactListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _ , _, success in
             guard let self else { return }

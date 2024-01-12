@@ -8,6 +8,8 @@
 import UIKit
 
 final class AddContactViewController: UIViewController {
+    
+    // MARK: - Properties
     static var identifier: String {
         return String(describing: self)
     }
@@ -17,6 +19,7 @@ final class AddContactViewController: UIViewController {
     @IBOutlet weak private var ageTextField: UITextField!
     @IBOutlet weak private var phoneNumberTextField: UITextField!
     
+    // MARK: - Init
     init?(contactManager: ContactManager, coder: NSCoder) {
         self.contactManager = contactManager
         super.init(coder: coder)
@@ -26,11 +29,13 @@ final class AddContactViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextField()
     }
     
+    // MARK: - Helper
     private func setUpTextField() {
         nameTextField.keyboardType = .default
         ageTextField.keyboardType = .numberPad
@@ -68,7 +73,7 @@ final class AddContactViewController: UIViewController {
         case .success(let contact):
             contactManager.addContact(contact: contact)
             dismiss(animated: true) {
-                NotificationCenter.default.post(name: NotificationName.updateContactUI, 
+                NotificationCenter.default.post(name: .updateContactUI, 
                                                 object: nil)
             }
         case .failure(let error):

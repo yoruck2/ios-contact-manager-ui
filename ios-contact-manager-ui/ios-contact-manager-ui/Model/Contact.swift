@@ -8,6 +8,7 @@
 import Foundation
 
 struct Contact: Decodable {
+    // MARK: - Properties
     var id = UUID().uuidString
     let name: String
     let phoneNumber: String
