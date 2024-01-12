@@ -34,7 +34,16 @@ final class AddContactViewController: UIViewController {
     private func setUpTextField() {
         nameTextField.keyboardType = .default
         ageTextField.keyboardType = .numberPad
-        phoneNumberTextField.keyboardType = .numberPad
+        phoneNumberTextField.keyboardType = .phonePad
+        phoneNumberTextField.addTarget(self, 
+                                       action: #selector(phoneNumberTextFieldEditingChanged),
+                                       for: .editingChanged)
+    }
+    
+    @objc 
+    private func phoneNumberTextFieldEditingChanged(_ textField: UITextField) {
+        guard let text = textField.text?.replacingOccurrences(of: "-", with: "") else { return }
+        textField.text = text.formattingPhoneNumber()
     }
     
     @IBAction private func tappedCancelButton(_ sender: UIBarButtonItem) {
@@ -58,18 +67,14 @@ final class AddContactViewController: UIViewController {
         switch validation {
         case .success(let contact):
             contactManager.addContact(contact: contact)
-            dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name("updateUI"), object: nil)
+            dismiss(animated: true) {
+                NotificationCenter.default.post(name: NotificationName.updateContactUI, 
+                                                object: nil)
+            }
         case .failure(let error):
             makeAlert(message: error.localizedDescription,
                       actions: [UIAlertAction(title: "확인",
                                               style: .default)])
         }
-    }
-}
-
-extension AddContactViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return true
     }
 }
