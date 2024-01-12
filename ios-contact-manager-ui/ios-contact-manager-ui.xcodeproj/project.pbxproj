@@ -11,6 +11,10 @@
 		274612952B4D2796000372A3 /* ContactError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274612942B4D2796000372A3 /* ContactError.swift */; };
 		274612972B4D288A000372A3 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274612962B4D288A000372A3 /* InputValidator.swift */; };
 		277DCD0A2B4B8DA90076784E /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277DCD092B4B8DA90076784E /* AddContactViewController.swift */; };
+		2782250E2B5127C1000A5EEE /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782250D2B5127C1000A5EEE /* String+.swift */; };
+		278225102B51284C000A5EEE /* ContactTableViewErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782250F2B51284C000A5EEE /* ContactTableViewErrorCell.swift */; };
+		278225122B5128EA000A5EEE /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278225112B5128EA000A5EEE /* Array+.swift */; };
+		278225142B512A43000A5EEE /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278225132B512A43000A5EEE /* NotificationName.swift */; };
 		846A09D02B43AB0000236358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09CF2B43AB0000236358 /* AppDelegate.swift */; };
 		846A09D22B43AB0000236358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09D12B43AB0000236358 /* SceneDelegate.swift */; };
 		846A09D42B43AB0000236358 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09D32B43AB0000236358 /* ContactListViewController.swift */; };
@@ -27,6 +31,10 @@
 		274612942B4D2796000372A3 /* ContactError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactError.swift; sourceTree = "<group>"; };
 		274612962B4D288A000372A3 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 		277DCD092B4B8DA90076784E /* AddContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
+		2782250D2B5127C1000A5EEE /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		2782250F2B51284C000A5EEE /* ContactTableViewErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewErrorCell.swift; sourceTree = "<group>"; };
+		278225112B5128EA000A5EEE /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
+		278225132B512A43000A5EEE /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		846A09CC2B43AB0000236358 /* ios-contact-manager-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-contact-manager-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		846A09CF2B43AB0000236358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846A09D12B43AB0000236358 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				274612922B4D2218000372A3 /* UIViewController+.swift */,
+				2782250D2B5127C1000A5EEE /* String+.swift */,
+				278225112B5128EA000A5EEE /* Array+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -74,6 +84,7 @@
 				846A09D52B43AB0000236358 /* Main.storyboard */,
 				846A09DA2B43AB0200236358 /* LaunchScreen.storyboard */,
 				846F3E582B47B9D300FE38D1 /* ContactTableViewCell.swift */,
+				2782250F2B51284C000A5EEE /* ContactTableViewErrorCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -85,6 +96,7 @@
 				846A09E52B43F89D00236358 /* ContactManager.swift */,
 				274612942B4D2796000372A3 /* ContactError.swift */,
 				274612962B4D288A000372A3 /* InputValidator.swift */,
+				278225132B512A43000A5EEE /* NotificationName.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,13 +219,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				278225122B5128EA000A5EEE /* Array+.swift in Sources */,
 				846F3E592B47B9D300FE38D1 /* ContactTableViewCell.swift in Sources */,
 				277DCD0A2B4B8DA90076784E /* AddContactViewController.swift in Sources */,
+				278225142B512A43000A5EEE /* NotificationName.swift in Sources */,
 				274612932B4D2218000372A3 /* UIViewController+.swift in Sources */,
 				846A09E62B43F89D00236358 /* ContactManager.swift in Sources */,
 				846A09E42B43F71800236358 /* Contact.swift in Sources */,
 				274612972B4D288A000372A3 /* InputValidator.swift in Sources */,
 				846A09D42B43AB0000236358 /* ContactListViewController.swift in Sources */,
+				278225102B51284C000A5EEE /* ContactTableViewErrorCell.swift in Sources */,
+				2782250E2B5127C1000A5EEE /* String+.swift in Sources */,
 				846A09D02B43AB0000236358 /* AppDelegate.swift in Sources */,
 				274612952B4D2796000372A3 /* ContactError.swift in Sources */,
 				846A09D22B43AB0000236358 /* SceneDelegate.swift in Sources */,
@@ -368,6 +384,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K9NKZR257N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-contact-manager-ui/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -375,6 +392,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -395,6 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K9NKZR257N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-contact-manager-ui/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -402,6 +421,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
