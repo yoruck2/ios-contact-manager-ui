@@ -46,7 +46,10 @@ final class ContactManager {
     
     func editContact(contact: Contact) {
         let contactIndices = contacts.indices
-        let indexOfContactToBeEdited = contactIndices.filter { contacts[$0].id == contact.id }
+        let indexOfContactToBeEdited = contactIndices.filter {
+            guard let contact = contacts[safe: $0] else { return false }
+            return contact.id == contact.id
+        }
         indexOfContactToBeEdited.forEach { contacts[$0] = contact }
     }
 }
