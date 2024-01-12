@@ -29,8 +29,8 @@ struct InputValidator {
         else {
             throw ContactError.nameInputError
         }
-        let trimmingName = name.replacingOccurrences(of: " ", with: "")
-        return trimmingName
+        let trimmedName = name.replacingOccurrences(of: " ", with: "")
+        return trimmedName
     }
     
     private func validateAgeInput(ageTextField: UITextField) throws -> Int {
