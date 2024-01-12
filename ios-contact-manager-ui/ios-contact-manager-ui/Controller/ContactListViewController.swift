@@ -21,7 +21,10 @@ final class ContactListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         contactManager.loadData()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: Notification.Name("updateUI"), object: nil)
+        NotificationCenter.default.addObserver(self, 
+                                               selector: #selector(updateUI),
+                                               name: NotificationName.updateContactUI,
+                                               object: nil)
     }
     
     private func setupTableView() {
@@ -55,7 +58,8 @@ extension ContactListViewController: UITableViewDataSource, UITableViewDelegate 
         guard
             let cell: ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier) as? ContactTableViewCell
         else {
-            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier, for: indexPath)
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewErrorCell.identifier, 
+                                                                      for: indexPath)
             cell.textLabel?.text = "내용을 불러오는데 실패했습니다."
             return cell
         }
