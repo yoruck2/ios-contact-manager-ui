@@ -11,7 +11,9 @@ final class ContactListViewController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak private var contactTableView: UITableView!
+    
     private var contactManager: ContactManager
+    private var isFiltered: Bool = false
     
     // MARK: - Init
     required init?(coder: NSCoder) {
@@ -23,28 +25,42 @@ final class ContactListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setUpSearch()
         contactManager.loadData()
-        NotificationCenter.default.addObserver(self, 
-                                               selector: #selector(updateUI),
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateTableView),
                                                name: .updateContactUI,
                                                object: nil)
     }
     
     // MARK: - Helper
+    
+    private func setUpSearch() {
+        let contactSearchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = contactSearchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        contactSearchController.searchBar.delegate = self
+        contactSearchController.searchBar.placeholder = "이름을 입력해주세요."
+    }
+    
     private func setupTableView() {
         contactTableView.dataSource = self
         contactTableView.delegate = self
     }
     
     @objc
-    private func updateUI() {
-        contactTableView.reloadData()
+    private func updateTableView() {
+        contactTableView.insertRows(at: [IndexPath(row: contactManager.contactRow,
+                                                   section: 0)],
+                                    with: .automatic)
     }
     
     @IBAction private func tappedAddContactButton(_ sender: UIBarButtonItem) {
         guard
-            let addContactViewController = storyboard?.instantiateViewController(identifier: AddContactViewController.identifier, creator: { coder in
-                return AddContactViewController(contactManager: self.contactManager, coder: coder)
+            let addContactViewController = storyboard?.instantiateViewController(identifier: AddContactViewController.identifier,
+                                                                                 creator: { coder in
+                return AddContactViewController(contactManager: self.contactManager,
+                                                coder: coder)
             })
         else {
             return
@@ -56,19 +72,20 @@ final class ContactListViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension ContactListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactManager.contactsCount
+        return isFiltered ? contactManager.filteredContactsCount : contactManager.contactsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell: ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier) as? ContactTableViewCell
+            let cell: ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewCell.identifier,
+                                                                           for: indexPath) as? ContactTableViewCell
         else {
-            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewErrorCell.identifier, 
+            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: ContactTableViewErrorCell.identifier,
                                                                       for: indexPath)
             cell.textLabel?.text = "내용을 불러오는데 실패했습니다."
             return cell
         }
-        let contact = contactManager.contact(row: indexPath.row)
+        let contact = isFiltered ? contactManager.filteredContact(row: indexPath.row) : contactManager.contact(row: indexPath.row)
         cell.setUpCell(with: contact)
         return cell
     }
@@ -84,5 +101,20 @@ extension ContactListViewController: UITableViewDataSource {
             success(true)
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension ContactListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let text = searchText.lowercased()
+        isFiltered = !text.isEmpty
+        contactManager.filteredContacts(by: text)
+        contactTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isFiltered = false
+        contactTableView.reloadData()
     }
 }
