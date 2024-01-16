@@ -11,9 +11,18 @@ final class ContactManager {
     
     // MARK: - Properties
     private var contacts: [Contact]
+    private var filteredContacts: [Contact] = []
     
     var contactsCount: Int {
         return contacts.count
+    }
+    
+    var filteredContactsCount: Int {
+        return filteredContacts.count
+    }
+    
+    var contactRow: Int {
+        return contactsCount - 1
     }
     
     // MARK: - Init
@@ -24,6 +33,10 @@ final class ContactManager {
     // MARK: - Helper
     func contact(row: Int) -> Contact {
         return contacts[row]
+    }
+    
+    func filteredContact(row: Int) -> Contact {
+        return filteredContacts[row]
     }
     
     func loadData() {
@@ -55,6 +68,12 @@ final class ContactManager {
             return editingContact.id == contact.id
         }
         indexOfContactToBeEdited.forEach { contacts[$0] = contact }
+    }
+    
+    func filteredContacts(by searchText: String) {
+        filteredContacts = contacts.filter { 
+            $0.name.localizedCaseInsensitiveContains(searchText)
+        }
     }
 }
 
