@@ -7,12 +7,10 @@
 
 import UIKit
 
-final class AddContactViewController: UIViewController {
+final class AddContactViewController: UIViewController, TypeIdentifiable {
     
     // MARK: - Properties
-    static var identifier: String {
-        return String(describing: self)
-    }
+    
     private let contactManager: ContactManager
     
     @IBOutlet weak private var nameTextField: UITextField!
@@ -48,7 +46,7 @@ final class AddContactViewController: UIViewController {
     @objc 
     private func phoneNumberTextFieldEditingChanged(_ textField: UITextField) {
         guard let text = textField.text?.replacingOccurrences(of: "-", with: "") else { return }
-        textField.text = text.formattingPhoneNumber()
+        textField.text = text.formattedPhoneNumber
     }
     
     @IBAction private func tappedCancelButton(_ sender: UIBarButtonItem) {

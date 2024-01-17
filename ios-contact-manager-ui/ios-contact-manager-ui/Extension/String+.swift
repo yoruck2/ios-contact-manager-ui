@@ -6,7 +6,7 @@
 //
 
 extension String {
-    func formattingPhoneNumber() -> String {
+    var formattedPhoneNumber: String {
         let count = self.count
         let divider: Character = "-"
         var phoneNumber = self

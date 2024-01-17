@@ -15,6 +15,7 @@
 		278225102B51284C000A5EEE /* ContactTableViewErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782250F2B51284C000A5EEE /* ContactTableViewErrorCell.swift */; };
 		278225122B5128EA000A5EEE /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278225112B5128EA000A5EEE /* Array+.swift */; };
 		278225142B512A43000A5EEE /* NotificationName+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278225132B512A43000A5EEE /* NotificationName+.swift */; };
+		27CE92342B57B83500EB0CCF /* TypeIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CE92332B57B83500EB0CCF /* TypeIdentifiable.swift */; };
 		846A09D02B43AB0000236358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09CF2B43AB0000236358 /* AppDelegate.swift */; };
 		846A09D22B43AB0000236358 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09D12B43AB0000236358 /* SceneDelegate.swift */; };
 		846A09D42B43AB0000236358 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A09D32B43AB0000236358 /* ContactListViewController.swift */; };
@@ -35,6 +36,7 @@
 		2782250F2B51284C000A5EEE /* ContactTableViewErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewErrorCell.swift; sourceTree = "<group>"; };
 		278225112B5128EA000A5EEE /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		278225132B512A43000A5EEE /* NotificationName+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+.swift"; sourceTree = "<group>"; };
+		27CE92332B57B83500EB0CCF /* TypeIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeIdentifiable.swift; sourceTree = "<group>"; };
 		846A09CC2B43AB0000236358 /* ios-contact-manager-ui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-contact-manager-ui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		846A09CF2B43AB0000236358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		846A09D12B43AB0000236358 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		27CE92322B57B7F400EB0CCF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				27CE92332B57B83500EB0CCF /* TypeIdentifiable.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		846A09C32B43AB0000236358 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +152,7 @@
 				27B86A2B2B4551E10081F621 /* View */,
 				27B86A2A2B4551DD0081F621 /* Controller */,
 				274612912B4D21F4000372A3 /* Extension */,
+				27CE92322B57B7F400EB0CCF /* Utils */,
 				27B86A2E2B45520F0081F621 /* Resource */,
 				846A09DD2B43AB0200236358 /* Info.plist */,
 			);
@@ -232,6 +243,7 @@
 				2782250E2B5127C1000A5EEE /* String+.swift in Sources */,
 				846A09D02B43AB0000236358 /* AppDelegate.swift in Sources */,
 				274612952B4D2796000372A3 /* ContactError.swift in Sources */,
+				27CE92342B57B83500EB0CCF /* TypeIdentifiable.swift in Sources */,
 				846A09D22B43AB0000236358 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

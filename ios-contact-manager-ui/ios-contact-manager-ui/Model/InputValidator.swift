@@ -26,7 +26,7 @@ struct InputValidator {
     private func validateNameInput(nameTextField: UITextField) throws -> String {
         guard
             let name = nameTextField.text,
-            !name.isEmpty
+            name.isEmpty == false
         else {
             throw ContactError.nameInputError
         }
@@ -37,12 +37,12 @@ struct InputValidator {
     private func validateAgeInput(ageTextField: UITextField) throws -> Int {
         guard
             let age = ageTextField.text,
-            let convertAgeToInt = UInt(age),
-            convertAgeToInt < 1000
+            let convertedAgeToInt = UInt(age),
+            convertedAgeToInt < 1000
         else {
             throw ContactError.ageInputError
         }
-        return Int(convertAgeToInt)
+        return Int(convertedAgeToInt)
     }
     
     private func validatePhoneNumberInput(phoneNumberTextField: UITextField) throws -> String {
