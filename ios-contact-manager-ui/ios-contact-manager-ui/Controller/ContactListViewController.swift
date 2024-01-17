@@ -33,6 +33,15 @@ final class ContactListViewController: UIViewController {
                                                object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
     // MARK: - Helper
     
     private func setUpSearch() {
