@@ -57,15 +57,15 @@ final class ContactListViewController: UIViewController {
     
     @IBAction private func tappedAddContactButton(_ sender: UIBarButtonItem) {
         guard
-            let addContactViewController = storyboard?.instantiateViewController(identifier: AddContactViewController.identifier,
+            let contactManageViewController = storyboard?.instantiateViewController(identifier: ContactManageViewController.identifier,
                                                                                  creator: { coder in
-                return AddContactViewController(contactManager: self.contactManager,
-                                                coder: coder)
+                return ContactManageViewController(contactManager: self.contactManager,
+                                                   navigationBarTitle: "새 연락처", coder: coder)
             })
         else {
             return
         }
-        present(addContactViewController, animated: true)
+        present(contactManageViewController, animated: true)
     }
 }
 
@@ -88,6 +88,18 @@ extension ContactListViewController: UITableViewDelegate {
         let contact = isFiltered ? contactManager.filteredContact(row: indexPath.row) : contactManager.contact(row: indexPath.row)
         cell.setUpCell(with: contact)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard
+            let contactManageViewController = storyboard?.instantiateViewController(identifier: ContactManageViewController.identifier,
+                                                                                    creator: { coder in
+                return ContactManageViewController(contactManager: self.contactManager, contact: self.contactManager.contact(row: indexPath.row), navigationBarTitle: "연락처 변경", coder: coder)
+            })
+        else {
+            return
+        }
+        navigationController?.pushViewController(contactManageViewController, animated: true)
     }
 }
 

@@ -7,17 +7,17 @@
 
 import UIKit
 
-final class AddContactViewController: UIViewController {
+class ContactManageViewController: UIViewController {
     
     // MARK: - Properties
-    static var identifier: String {
+    class var identifier: String {
         return String(describing: self)
     }
     private let contactManager: ContactManager
     
-    @IBOutlet weak private var nameTextField: UITextField!
-    @IBOutlet weak private var ageTextField: UITextField!
-    @IBOutlet weak private var phoneNumberTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var ageTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
     
     // MARK: - Init
     init?(contactManager: ContactManager, coder: NSCoder) {
@@ -36,7 +36,7 @@ final class AddContactViewController: UIViewController {
     }
     
     // MARK: - Helper
-    private func setUpTextField() {
+    func setUpTextField() {
         nameTextField.keyboardType = .default
         ageTextField.keyboardType = .numberPad
         phoneNumberTextField.keyboardType = .phonePad
@@ -71,7 +71,7 @@ final class AddContactViewController: UIViewController {
                                                       phoneNumberTextField: phoneNumberTextField)
         switch validation {
         case .success(let contact):
-            contactManager.addContact(contact: contact)
+//            contactManager.addContact(contact: contact)
             dismiss(animated: true) {
                 NotificationCenter.default.post(name: .updateContactUI, 
                                                 object: nil)
