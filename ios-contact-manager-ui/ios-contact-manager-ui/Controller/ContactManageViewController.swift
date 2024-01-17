@@ -10,18 +10,27 @@ import UIKit
 class ContactManageViewController: UIViewController {
     
     // MARK: - Properties
-    class var identifier: String {
+    static var identifier: String {
         return String(describing: self)
     }
     private let contactManager: ContactManager
+    private let contact: Contact?
+    private let navigationBarTitle: String?
+    
+    
+    @IBOutlet weak var contactNavigationItem: UINavigationItem!
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     
+    
+    
     // MARK: - Init
-    init?(contactManager: ContactManager, coder: NSCoder) {
+    init?(contactManager: ContactManager, contact: Contact? = nil, navigationBarTitle: String, coder: NSCoder) {
         self.contactManager = contactManager
+        self.contact = contact
+        self.navigationBarTitle = navigationBarTitle
         super.init(coder: coder)
     }
     
@@ -35,17 +44,27 @@ class ContactManageViewController: UIViewController {
         setUpTextField()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        contactNavigationItem.title = navigationBarTitle
+    }
+    
     // MARK: - Helper
     func setUpTextField() {
+        
         nameTextField.keyboardType = .default
         ageTextField.keyboardType = .numberPad
         phoneNumberTextField.keyboardType = .phonePad
         phoneNumberTextField.addTarget(self, 
                                        action: #selector(phoneNumberTextFieldEditingChanged),
                                        for: .editingChanged)
+        guard let contact = contact else { return }
+        nameTextField.text = contact.name
+        ageTextField.text = String(contact.age)
+        phoneNumberTextField.text = contact.phoneNumber
     }
     
-    @objc 
+    @objc
     private func phoneNumberTextFieldEditingChanged(_ textField: UITextField) {
         guard let text = textField.text?.replacingOccurrences(of: "-", with: "") else { return }
         textField.text = text.formattingPhoneNumber()
@@ -60,7 +79,12 @@ class ContactManageViewController: UIViewController {
                                   style: .destructive,
                                   handler: { [weak self] _ in
                                       guard let self else { return }
-                                      dismiss(animated: true)})
+                                      guard contact != nil else {
+                                          dismiss(animated: true)
+                                          return
+                                      }
+                                      navigationController?.popViewController(animated: true)
+                                  })
                   ])
     }
     
@@ -70,12 +94,21 @@ class ContactManageViewController: UIViewController {
                                                       ageTextField: ageTextField,
                                                       phoneNumberTextField: phoneNumberTextField)
         switch validation {
-        case .success(let contact):
-//            contactManager.addContact(contact: contact)
-            dismiss(animated: true) {
-                NotificationCenter.default.post(name: .updateContactUI, 
-                                                object: nil)
+        case .success(var newContact):
+            guard let contact = contact else {
+                contactManager.addContact(contact: newContact)
+                dismiss(animated: true) {
+                    NotificationCenter.default.post(name: .updateContactUI,
+                                                    object: nil)
+                }
+                return
             }
+            newContact.id = contact.id
+            contactManager.editContact(contact: newContact)
+            NotificationCenter.default.post(name: .updateContactUI,
+                                            object: nil)
+            navigationController?.popViewController(animated: true)
+            
         case .failure(let error):
             makeAlert(message: error.localizedDescription,
                       actions: [UIAlertAction(title: "확인",

@@ -37,21 +37,21 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ContactTableViewCell" textLabel="7Lt-4n-fJf" detailTextLabel="l55-f1-52V" style="IBUITableViewCellStyleSubtitle" id="exQ-Gs-E91" customClass="ContactTableViewCell" customModule="ios_contact_manager_ui" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="57.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="exQ-Gs-E91" id="3co-DD-zgj">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="57.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="7Lt-4n-fJf">
-                                                    <rect key="frame" x="20" y="5" width="33" height="20.333333333333332"/>
+                                                    <rect key="frame" x="20" y="8.9999999999999982" width="33" height="20.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="l55-f1-52V">
-                                                    <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                                    <rect key="frame" x="19.999999999999996" y="32.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <nil key="textColor"/>
@@ -65,7 +65,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableViewErrorCell" id="bNV-dE-RsW">
-                                        <rect key="frame" x="0.0" y="93.666667938232422" width="393" height="44.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="107.66666793823242" width="393" height="44.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bNV-dE-RsW" id="jgL-je-S5M">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
@@ -103,10 +103,10 @@
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
         </scene>
-        <!--Add Contact View Controller-->
+        <!--Contact Manage View Controller-->
         <scene sceneID="vtk-Ya-Bv1">
             <objects>
-                <viewController storyboardIdentifier="AddContactViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iit-K1-e5v" customClass="AddContactViewController" customModule="ios_contact_manager_ui" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactManageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iit-K1-e5v" customClass="ContactManageViewController" customModule="ios_contact_manager_ui" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W9L-Rw-aw3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -199,6 +199,7 @@
                     </view>
                     <connections>
                         <outlet property="ageTextField" destination="3NK-6L-314" id="cIT-YU-SOC"/>
+                        <outlet property="contactNavigationItem" destination="71d-8d-w07" id="Jl2-wz-JZf"/>
                         <outlet property="nameTextField" destination="c9B-wC-CAT" id="Xxz-9s-e5Y"/>
                         <outlet property="phoneNumberTextField" destination="hjH-iB-Imd" id="2YM-vf-Nvh"/>
                     </connections>
