@@ -58,7 +58,19 @@ final class ContactManager {
     }
     
     func deleteContact(index: Int) {
-        contacts.remove(at: index)
+        guard 
+            !filteredContacts.isEmpty
+        else {
+            contacts.remove(at: index)
+            return
+        }
+        let contactIndices = contacts.indices
+        let indexOfContactToBeEdited = contactIndices.filter {
+            guard let editingContact = contacts[safe: $0] else { return false }
+            return editingContact.id == filteredContacts[index].id
+        }
+        indexOfContactToBeEdited.forEach { contacts.remove(at: $0) }
+        filteredContacts.remove(at: index)
     }
     
     func editContact(contact: Contact) {
