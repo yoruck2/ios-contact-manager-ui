@@ -42,8 +42,8 @@ final class ContactListViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-    // MARK: - Helper
     
+    // MARK: - Helper
     private func setUpSearch() {
         let contactSearchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = contactSearchController
@@ -67,7 +67,7 @@ final class ContactListViewController: UIViewController {
     @IBAction private func tappedAddContactButton(_ sender: UIBarButtonItem) {
         guard
             let contactManageViewController = storyboard?.instantiateViewController(identifier: ContactManageViewController.identifier,
-                                                                                 creator: { coder in
+                                                                                    creator: { coder in
                 return ContactManageViewController(contactManager: self.contactManager,
                                                    navigationBarTitle: "새 연락처", coder: coder)
             })

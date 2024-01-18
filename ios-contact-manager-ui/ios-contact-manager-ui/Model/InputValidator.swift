@@ -26,7 +26,7 @@ struct InputValidator {
     private func validateNameInput(nameTextField: UITextField) throws -> String {
         guard
             let name = nameTextField.text,
-            !name.isEmpty
+            name.isEmpty == false
         else {
             throw ContactError.nameInputError
         }

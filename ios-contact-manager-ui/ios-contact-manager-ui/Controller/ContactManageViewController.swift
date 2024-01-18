@@ -13,18 +13,15 @@ class ContactManageViewController: UIViewController {
     static var identifier: String {
         return String(describing: self)
     }
+    
     private let contactManager: ContactManager
     private let contact: Contact?
     private let navigationBarTitle: String?
     
-    
     @IBOutlet weak var contactNavigationItem: UINavigationItem!
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    
-    
     
     // MARK: - Init
     init?(contactManager: ContactManager, contact: Contact? = nil, navigationBarTitle: String, coder: NSCoder) {
@@ -51,7 +48,6 @@ class ContactManageViewController: UIViewController {
     
     // MARK: - Helper
     func setUpTextField() {
-        
         nameTextField.keyboardType = .default
         ageTextField.keyboardType = .numberPad
         phoneNumberTextField.keyboardType = .phonePad
@@ -67,7 +63,7 @@ class ContactManageViewController: UIViewController {
     @objc
     private func phoneNumberTextFieldEditingChanged(_ textField: UITextField) {
         guard let text = textField.text?.replacingOccurrences(of: "-", with: "") else { return }
-        textField.text = text.formattingPhoneNumber()
+        textField.text = text.formattedPhoneNumber
     }
     
     @IBAction private func tappedCancelButton(_ sender: UIBarButtonItem) {

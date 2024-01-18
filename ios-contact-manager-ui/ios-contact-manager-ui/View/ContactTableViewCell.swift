@@ -13,6 +13,7 @@ final class ContactTableViewCell: UITableViewCell {
     static var identifier: String {
         return String(describing: self)
     }
+    
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var subtitleLabel: UILabel!
     
