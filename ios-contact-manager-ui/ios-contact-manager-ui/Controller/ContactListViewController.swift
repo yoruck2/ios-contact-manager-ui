@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ContactListViewController: UIViewController {
+final class ContactListViewController: UIViewController, UpdateContactDelegate {
     
     // MARK: - Properties
     @IBOutlet weak private var contactTableView: UITableView!
@@ -24,10 +24,6 @@ final class ContactListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         contactManager.loadData()
-        NotificationCenter.default.addObserver(self, 
-                                               selector: #selector(updateUI),
-                                               name: .updateContactUI,
-                                               object: nil)
     }
     
     // MARK: - Helper
@@ -36,19 +32,19 @@ final class ContactListViewController: UIViewController {
         contactTableView.delegate = self
     }
     
-    @objc
-    private func updateUI() {
+    func updateTableView() {
         contactTableView.reloadData()
     }
     
     @IBAction private func tappedAddContactButton(_ sender: UIBarButtonItem) {
         guard
             let addContactViewController = storyboard?.instantiateViewController(identifier: AddContactViewController.identifier, creator: { coder in
-                return AddContactViewController(contactManager: self.contactManager, coder: coder)
+                return AddContactViewController(contactManager: self.contactManager, delegate: self, coder: coder)
             })
         else {
             return
         }
+        // let addContactViewController = AddContactViewController() 와 같은 구조.. ContactList뷰컨에서 인스턴스를 생성하고 있기 때문에 참조관계 발생 ( 강한참조 + 1)
         present(addContactViewController, animated: true)
     }
 }

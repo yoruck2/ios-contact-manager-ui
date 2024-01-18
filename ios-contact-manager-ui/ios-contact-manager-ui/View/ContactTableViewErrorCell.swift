@@ -7,10 +7,6 @@
 
 import UIKit
 
-class ContactTableViewErrorCell: UITableViewCell {
+final class ContactTableViewErrorCell: UITableViewCell, TypeIdentifiable {
     
-    // MARK: - Properties
-    static var identifier: String {
-        return String(describing: self)
-    }
 }
