@@ -70,7 +70,7 @@ extension ContactListViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - UITableViewDataSource
 extension ContactListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _ , _, success in
