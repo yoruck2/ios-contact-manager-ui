@@ -10,16 +10,17 @@ import UIKit
 final class AddContactViewController: UIViewController, TypeIdentifiable {
     
     // MARK: - Properties
-    
     private let contactManager: ContactManager
+    weak var delegate: UpdateContactDelegate?
     
     @IBOutlet weak private var nameTextField: UITextField!
     @IBOutlet weak private var ageTextField: UITextField!
     @IBOutlet weak private var phoneNumberTextField: UITextField!
     
     // MARK: - Init
-    init?(contactManager: ContactManager, coder: NSCoder) {
+    init?(contactManager: ContactManager, delegate: UpdateContactDelegate, coder: NSCoder) {
         self.contactManager = contactManager
+        self.delegate = delegate
         super.init(coder: coder)
     }
     
@@ -71,8 +72,7 @@ final class AddContactViewController: UIViewController, TypeIdentifiable {
         case .success(let contact):
             contactManager.addContact(contact: contact)
             dismiss(animated: true) {
-                NotificationCenter.default.post(name: .updateContactUI, 
-                                                object: nil)
+                self.delegate?.updateTableView()
             }
         case .failure(let error):
             makeAlert(message: error.localizedDescription,
