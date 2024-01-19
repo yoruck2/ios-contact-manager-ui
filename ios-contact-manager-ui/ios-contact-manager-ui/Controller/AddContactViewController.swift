@@ -51,7 +51,7 @@ final class AddContactViewController: UIViewController, TypeIdentifiable {
     }
     
     @IBAction private func tappedCancelButton(_ sender: UIBarButtonItem) {
-        makeAlert(message: "정말로 취소하시겠습니까?",
+        presentAlert(message: "정말로 취소하시겠습니까?",
                   actions: [
                     UIAlertAction(title: "아니오",
                                   style: .cancel),
@@ -75,7 +75,7 @@ final class AddContactViewController: UIViewController, TypeIdentifiable {
                 self.delegate?.updateTableView()
             }
         case .failure(let error):
-            makeAlert(message: error.localizedDescription,
+            presentAlert(message: error.localizedDescription,
                       actions: [UIAlertAction(title: "확인",
                                               style: .default)])
         }
