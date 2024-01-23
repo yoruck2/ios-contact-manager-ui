@@ -22,7 +22,10 @@ struct InputValidator {
             return .failure(error)
         }
     }
-    
+}
+
+// MARK: - Private Methods
+extension InputValidator {
     private func validateNameInput(nameTextField: UITextField) throws -> String {
         guard
             let name = nameTextField.text,
