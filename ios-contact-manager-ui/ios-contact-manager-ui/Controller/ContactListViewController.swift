@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ContactListViewController: UIViewController {
+final class ContactListViewController: UIViewController, UpdateContactDelegate {
     
     // MARK: - Properties
     @IBOutlet weak private var contactTableView: UITableView!
@@ -27,10 +27,6 @@ final class ContactListViewController: UIViewController {
         setupTableView()
         setUpSearch()
         contactManager.loadData()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateTableView),
-                                               name: .updateContactUI,
-                                               object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,11 +40,27 @@ final class ContactListViewController: UIViewController {
     }
     
     // MARK: - Helper
+    func updateTableViewForAdd() {
+        contactTableView.insertRows(
+            at: [
+                IndexPath(row: contactManager.contactRow, section: 0)
+            ],
+            with: .automatic)
+    }
+    
+    func updateTableViewForEdit() {
+        contactTableView.reloadData()
+    }
+}
+
+// MARK: - Private Methods
+extension ContactListViewController {
     private func setUpSearch() {
         let contactSearchController = UISearchController(searchResultsController: nil)
         navigationItem.searchController = contactSearchController
         navigationItem.hidesSearchBarWhenScrolling = false
         contactSearchController.searchBar.delegate = self
+        contactSearchController.hidesNavigationBarDuringPresentation = false
         contactSearchController.searchBar.placeholder = "이름을 입력해주세요."
     }
     
@@ -57,20 +69,18 @@ final class ContactListViewController: UIViewController {
         contactTableView.delegate = self
     }
     
-    @objc
-    private func updateTableView() {
-        contactTableView.insertRows(at: [IndexPath(row: contactManager.contactRow,
-                                                   section: 0)],
-                                    with: .automatic)
-    }
-    
     @IBAction private func tappedAddContactButton(_ sender: UIBarButtonItem) {
         guard
-            let contactManageViewController = storyboard?.instantiateViewController(identifier: ContactManageViewController.identifier,
-                                                                                    creator: { coder in
-                return ContactManageViewController(contactManager: self.contactManager,
-                                                   navigationBarTitle: "새 연락처", coder: coder)
-            })
+            let contactManageViewController = storyboard?.instantiateViewController(
+                identifier: ContactManageViewController.identifier,
+                creator: { coder in
+                    return ContactManageViewController(
+                        contactManager: self.contactManager,
+                        navigationBarTitle: "새 연락처",
+                        delegate: self,
+                        coder: coder
+                    )
+                })
         else {
             return
         }
@@ -101,9 +111,20 @@ extension ContactListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard
-            let contactManageViewController = storyboard?.instantiateViewController(identifier: ContactManageViewController.identifier,
-                                                                                    creator: { coder in
-                return ContactManageViewController(contactManager: self.contactManager, contact: self.contactManager.contact(row: indexPath.row), navigationBarTitle: "연락처 변경", coder: coder)
+            let contactManageViewController = storyboard?.instantiateViewController(identifier: ContactManageViewController.identifier, creator: { [weak self] coder in
+                guard let self else { return UIViewController() }
+                
+                return isFiltered ?
+                ContactManageViewController(contactManager: contactManager,
+                                            contact: contactManager.filteredContact(row: indexPath.row),
+                                            navigationBarTitle: "연락처 변경",
+                                            delegate: self,
+                                            coder: coder)
+                : ContactManageViewController(contactManager: contactManager,
+                                              contact: contactManager.contact(row: indexPath.row),
+                                              navigationBarTitle: "연락처 변경",
+                                              delegate: self,
+                                              coder: coder)
             })
         else {
             return
@@ -130,7 +151,7 @@ extension ContactListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let text = searchText.lowercased()
         isFiltered = !text.isEmpty
-        contactManager.filteredContacts(by: text)
+        contactManager.filterContacts(by: text)
         contactTableView.reloadData()
     }
     
