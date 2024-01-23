@@ -7,13 +7,9 @@
 
 import UIKit
 
-final class ContactTableViewCell: UITableViewCell {
+final class ContactTableViewCell: UITableViewCell, TypeIdentifiable {
     
     // MARK: - Properties
-    static var identifier: String {
-        return String(describing: self)
-    }
-    
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var subtitleLabel: UILabel!
     
