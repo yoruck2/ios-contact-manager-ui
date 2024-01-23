@@ -97,6 +97,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contactTableView" destination="DX8-X4-w4o" id="HIz-kh-ZDR"/>
+                        <outlet property="navigationBar" destination="4Sy-pi-d8r" id="GN7-jI-PBu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
