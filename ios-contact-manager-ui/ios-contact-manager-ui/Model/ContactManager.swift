@@ -58,7 +58,8 @@ final class ContactManager {
     }
     
     func deleteContact(index: Int) {
-        contacts.remove(at: index)
+        contacts.removeAll { $0.id == filteredContacts[index].id }
+        filteredContacts.remove(at: index)
     }
     
     func editContact(contact: Contact) {
@@ -71,8 +72,12 @@ final class ContactManager {
     }
     
     func filteredContacts(by searchText: String) {
-        filteredContacts = contacts.filter { 
-            $0.name.localizedCaseInsensitiveContains(searchText)
+        if searchText == "" {
+            filteredContacts = contacts
+        } else {
+            filteredContacts = contacts.filter {
+                $0.name.localizedCaseInsensitiveContains(searchText)
+            }
         }
     }
 }
