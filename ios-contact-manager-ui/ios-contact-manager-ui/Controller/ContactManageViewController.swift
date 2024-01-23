@@ -7,27 +7,25 @@
 
 import UIKit
 
-class ContactManageViewController: UIViewController {
+class ContactManageViewController: UIViewController, TypeIdentifiable {
     
     // MARK: - Properties
-    static var identifier: String {
-        return String(describing: self)
-    }
-    
     private let contactManager: ContactManager
     private let contact: Contact?
     private let navigationBarTitle: String?
+    private weak var delegate: UpdateContactDelegate?
     
-    @IBOutlet weak var contactNavigationItem: UINavigationItem!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var ageTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet private weak var contactNavigationItem: UINavigationItem!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var ageTextField: UITextField!
+    @IBOutlet private weak var phoneNumberTextField: UITextField!
     
     // MARK: - Init
-    init?(contactManager: ContactManager, contact: Contact? = nil, navigationBarTitle: String, coder: NSCoder) {
+    init?(contactManager: ContactManager, contact: Contact? = nil, navigationBarTitle: String, delegate: UpdateContactDelegate?, coder: NSCoder) {
         self.contactManager = contactManager
         self.contact = contact
         self.navigationBarTitle = navigationBarTitle
+        self.delegate = delegate
         super.init(coder: coder)
     }
     
@@ -45,13 +43,15 @@ class ContactManageViewController: UIViewController {
         super.viewWillAppear(animated)
         contactNavigationItem.title = navigationBarTitle
     }
-    
-    // MARK: - Helper
-    func setUpTextField() {
+}
+
+// MARK: - Private Methods
+extension ContactManageViewController {
+    private func setUpTextField() {
         nameTextField.keyboardType = .default
         ageTextField.keyboardType = .numberPad
         phoneNumberTextField.keyboardType = .phonePad
-        phoneNumberTextField.addTarget(self, 
+        phoneNumberTextField.addTarget(self,
                                        action: #selector(phoneNumberTextFieldEditingChanged),
                                        for: .editingChanged)
         guard let contact = contact else { return }
@@ -93,16 +93,13 @@ class ContactManageViewController: UIViewController {
         case .success(var newContact):
             guard let contact = contact else {
                 contactManager.addContact(contact: newContact)
-                dismiss(animated: true) {
-                    NotificationCenter.default.post(name: .updateContactUI,
-                                                    object: nil)
-                }
+                delegate?.updateTableViewForAdd()
+                dismiss(animated: true)
                 return
             }
             newContact.id = contact.id
             contactManager.editContact(contact: newContact)
-            NotificationCenter.default.post(name: .updateContactUI,
-                                            object: nil)
+            delegate?.updateTableViewForEdit()
             navigationController?.popViewController(animated: true)
             
         case .failure(let error):
