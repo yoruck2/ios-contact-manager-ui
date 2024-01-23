@@ -17,14 +17,10 @@ class ContactManageViewController: UIViewController {
     private let contact: Contact?
     private let navigationBarTitle: String?
     
-    
     @IBOutlet weak var contactNavigationItem: UINavigationItem!
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    
-    
     
     // MARK: - Init
     init?(contactManager: ContactManager, contact: Contact? = nil, navigationBarTitle: String, coder: NSCoder) {
@@ -42,6 +38,7 @@ class ContactManageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTextField()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,8 +102,6 @@ class ContactManageViewController: UIViewController {
             }
             newContact.id = contact.id
             contactManager.editContact(contact: newContact)
-            NotificationCenter.default.post(name: .updateContactUI,
-                                            object: nil)
             navigationController?.popViewController(animated: true)
             
         case .failure(let error):
