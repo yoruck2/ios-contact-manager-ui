@@ -58,34 +58,67 @@ final class ContactManager {
     }
     
     func deleteContact(index: Int) {
-        guard 
-            !filteredContacts.isEmpty
-        else {
+        if filteredContacts.isEmpty {
             contacts.remove(at: index)
-            return
+        } else {
+            let contactIndices = contacts.indices
+            let indexOfContactToBeDeleted = contactIndices.filter {
+                filterdContactIDMatches(contact: filteredContact(row: index), at: $0)
+            }
+            updateContacts(at: indexOfContactToBeDeleted) { [weak self] in
+                self?.contacts.remove(at: $0)
+                self?.filteredContacts.remove(at: $0)
+            }
         }
-        let contactIndices = contacts.indices
-        let indexOfContactToBeEdited = contactIndices.filter {
-            guard let editingContact = contacts[safe: $0] else { return false }
-            return editingContact.id == filteredContacts[index].id
-        }
-        indexOfContactToBeEdited.forEach { contacts.remove(at: $0) }
-        filteredContacts.remove(at: index)
     }
     
     func editContact(contact: Contact) {
         let contactIndices = contacts.indices
-        let indexOfContactToBeEdited = contactIndices.filter {
-            guard let editingContact = contacts[safe: $0] else { return false }
-            return editingContact.id == contact.id
+        let indexOfContactToBeEdited: [Int]
+        
+        if filteredContacts.isEmpty {
+            indexOfContactToBeEdited = contactIndices.filter {
+                filterdContactIDMatches(contact: contact, at: $0)
+            }
+            updateContacts(at: indexOfContactToBeEdited) { [weak self] in
+                self?.contacts[$0] = contact
+            }
+        } else {
+            indexOfContactToBeEdited = contactIndices.filter {
+                filterdContactIDMatches(contact: contact, at: $0) &&
+                originContactIDMatches(contact: contact, at: $0)
+            }
+            updateContacts(at: indexOfContactToBeEdited) { [weak self] in
+                self?.filteredContacts[$0] = contact
+                self?.contacts[$0] = contact
+            }
         }
-        indexOfContactToBeEdited.forEach { contacts[$0] = contact }
     }
     
-    func filteredContacts(by searchText: String) {
-        filteredContacts = contacts.filter { 
+    func filterContacts(by searchText: String) {
+        filteredContacts = contacts.filter {
             $0.name.localizedCaseInsensitiveContains(searchText)
         }
     }
 }
 
+// MARK: - Private Methods
+extension ContactManager {
+    private func filterdContactIDMatches(contact: Contact, at index: Int) -> Bool {
+        guard let filteredContact = filteredContacts.isEmpty ? contacts[safe: index] : filteredContacts[safe: index] else { return false }
+        return filteredContact.id == contact.id
+    }
+    
+    private func originContactIDMatches(contact: Contact, at index: Int) -> Bool {
+        guard let originContact = contacts[safe: index] else { return false }
+        return originContact.id == contact.id
+    }
+    
+    private func updateContacts(at indices: [Int], completion: ((_ index: Int) -> Void)? = nil) {
+        indices.forEach { completion?($0) }
+    }
+    
+    private func updateFilteredContacts(at indices: [Int], with contact: Contact) {
+        indices.forEach { filteredContacts[$0] = contact }
+    }
+}
